@@ -36,7 +36,11 @@ async function oneRecording({ params, body }: Request, res: Response) {
             routerRecord : body.routeRecord,//
             folder_record:body.folder_record//
         }
+        console.log("data record",data);
+        
         const response = await service.getRecordingsFilter(id_xtam, date,data,dateRedis)
+        console.log("respose finish",response);
+        
         return res.status(200).send({ data: response })
     } catch (error) {
         errorHandle.hadleHttp(res, "error in database for geting data")

@@ -166,14 +166,21 @@ const estructureInfoApi = async (objetc: any, data: any) => {
         })
 
     })
+    const dataArr = new Set(arrayNameTs);
+    let result = [...dataArr];
+    console.log(result);
+    
+    
     let dataSend: any = {
         routerRecord: data.routerRecord,
-        filesTs: arrayNameTs,
+        filesTs: result,
         folderRecord: data.folder_record
     }
 
     const resApi = await axios.post(`${process.env.URL_API_RECORDINGS}/api/stremingRecording/`, dataSend);
     const responseApi = resApi.data['patchStreming']
+
+    
 
     return responseApi
 }
