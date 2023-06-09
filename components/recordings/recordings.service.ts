@@ -174,7 +174,8 @@ const estructureInfoApi = async (objetc: any, data: any) => {
     let dataSend: any = {
         routerRecord: data.routerRecord,
         filesTs: result,
-        folderRecord: data.folder_record
+        folderRecord: data.folder_record,
+        id:data.id
     }
 
     const resApi = await axios.post(`${process.env.URL_API_RECORDINGS}/api/stremingRecording/`, dataSend);
