@@ -15,7 +15,7 @@ app.use(json())
 db().then(()=>console.log("Conexion ready !!!"))
 redisService.syncInfoMongoDB()
 //app.use(helmet())
-app.use('/api',routes)s
+app.use('/api',routes)
 
 app.listen(PORT,()=>{
     console.log("LISTINIG FOR PORT  =>  ",PORT);
