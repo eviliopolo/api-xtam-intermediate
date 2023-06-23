@@ -13,9 +13,9 @@ const app = express()
 app.use(cors())
 app.use(json())
 db().then(()=>console.log("Conexion ready !!!"))
-//redisService.syncInfoMongoDB()
+redisService.syncInfoMongoDB()
 //app.use(helmet())
-app.use('/api',routes)
+app.use('/api',routes)s
 
 app.listen(PORT,()=>{
     console.log("LISTINIG FOR PORT  =>  ",PORT);
