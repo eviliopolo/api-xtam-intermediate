@@ -10,7 +10,16 @@ const client = new redisConect();
 
 const RedisCache = async (data: redisdata) => {
 
-    const KEYNAME = `${data.ID_XTAM}-${data.DATE}`
+    const datetime: Date = new Date(data.DATE); // Suponiendo que `data.DATE` es una cadena válida para crear un objeto `Date`
+    const year: number = datetime.getFullYear();
+    const month: number = datetime.getMonth() + 1; // Los meses comienzan desde 0, por lo que se agrega 1
+    const day: number = datetime.getDate();
+
+    const date: string = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+
+    const KEYNAME = `${data.ID_XTAM}-${date}`
+    //const KEYNAME = `${data.ID_XTAM}-${month}/${day}/${year}`
+    //const KEYNAME = `${data.ID_XTAM}-${data.DATE}`
     const updateInfoCam = {
         id_camera: data.ID_CAMERA,
         ts_name: data.TSNAME,
