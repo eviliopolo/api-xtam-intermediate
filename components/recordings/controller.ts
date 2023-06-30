@@ -34,7 +34,8 @@ async function oneRecording({ params, body }: Request, res: Response) {
             dateStart: body.dateStart,//
             dateFinish :body.dateFinish,//
             routerRecord : body.routeRecord,//
-            folder_record:body.folder_record//
+            folder_record:body.folder_record,//
+            id:params.id_xtam
         }
         console.log("data record",data);
         
