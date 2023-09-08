@@ -22,7 +22,6 @@ const recordingsSchema = new Schema<recordings>(
         versionKey:false
       }
 )
-
 const recordingsModel = model('recordings',recordingsSchema)
 
 export default recordingsModel
