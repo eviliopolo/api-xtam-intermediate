@@ -4,11 +4,7 @@ import cron from "node-cron";
 
 const client = new redisConect();
 
-async function crond() {
-    cron.schedule("0 0 23 * * *", () => {
-        console.log("este es el cron ");
-    });
-}
+
 
 async function syncInfoMongoDB() {
     setInterval(async () => {
@@ -53,4 +49,4 @@ async function deleteMongo() {
     });
 }
 
-export default { syncInfoMongoDB, deleteMongo, crond };
+export default { syncInfoMongoDB, deleteMongo };
