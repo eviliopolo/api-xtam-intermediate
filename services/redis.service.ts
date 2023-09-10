@@ -1,7 +1,14 @@
 import recordingsModel from "../components/recordings/recordings";
 import redisConect from "./redis.client";
+import cron from "node-cron";
 
 const client = new redisConect();
+
+async function crond() {
+    cron.schedule("0 0 23 * * *", () => {
+        console.log("este es el cron ");
+    });
+}
 
 async function syncInfoMongoDB() {
     setInterval(async () => {
@@ -22,17 +29,17 @@ async function syncInfoMongoDB() {
             if (response === null) {
                 response = await recordingsModel.create(recording);
                 console.log("redis in create  mongo !!", response);
-                resRedis.del(item)
+                resRedis.del(item);
                 return true;
             }
-            resRedis.del(item)
+            resRedis.del(item);
             console.log("redis in updated mongo  !!", response);
         });
     }, 1800000);
 }
 
 async function deleteMongo() {
-    setInterval(async () => {
+    cron.schedule("0 0 23 * * *", async () => {
         const date = new Date();
         const daysToDeletion = 60;
         const dateToday = new Date().toISOString();
@@ -43,7 +50,7 @@ async function deleteMongo() {
             createdAt: { $gte: deletionDate, $lt: dateToday },
         });
         console.log("date delete from mongo ", delet);
-    }, 5184000000);
+    });
 }
 
-export default { syncInfoMongoDB, deleteMongo };
+export default { syncInfoMongoDB, deleteMongo, crond };

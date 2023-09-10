@@ -15,6 +15,7 @@ app.use(json())
 db().then(()=>console.log("Conexion ready !!!"))
 redisService.syncInfoMongoDB()
 redisService.deleteMongo()
+redisService.crond()
 //app.use(helmet())
 app.use('/api',routes)
 
