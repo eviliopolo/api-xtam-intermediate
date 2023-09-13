@@ -37,10 +37,11 @@ async function syncInfoMongoDB() {
 async function deleteMongo() {
     cron.schedule("0 0 23 * * *", async () => {
         const date = new Date();
-        const daysToDeletion = 60;
-        const dateToday = new Date().toISOString();
+        const daysToDeletionOne = 60;
+        const daysToDeletionTwo = 59;
+        const dateToday = new Date(date.setDate(date.getDate() - daysToDeletionTwo)).toISOString();
         const deletionDate = new Date(
-            date.setDate(date.getDate() - daysToDeletion)
+            date.setDate(date.getDate() - daysToDeletionOne)
         ).toISOString();
         const delet: any = await recordingsModel.deleteMany({
             createdAt: { $gte: deletionDate, $lt: dateToday },
