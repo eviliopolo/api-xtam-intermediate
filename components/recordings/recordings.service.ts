@@ -157,7 +157,7 @@ const deleteRecording = async (id: string) => {
   return response;
 };
 
-const estructureInfoApi = async (objetc: any, data: any) => {
+const estructureInfoApi = async (objetc: any, data: any,id_xtam:any) => {
   let arrayNameTs: any = [];
 
   let searchInfo = objetc.filter(
@@ -174,6 +174,7 @@ const estructureInfoApi = async (objetc: any, data: any) => {
   console.log(result);
 
   let dataSend: any = {
+    id:id_xtam,
     routerRecord: data.routerRecord,
     filesTs: result,
     folderRecord: data.folder_record,
@@ -215,7 +216,7 @@ const getRecordingsFilter = async (
     let cam = camaraTmp.split("camara");
     const numberCam = parseInt(cam[1]);
     let camerasInfoTmp: any = Object.values(cameras[numberCam - 1]);
-    const apiResponse = await estructureInfoApi(camerasInfoTmp, data);
+    const apiResponse = await estructureInfoApi(camerasInfoTmp, data,id_xtam);
     return apiResponse;
   } else {
     // init about the geting and filter the dates
@@ -231,7 +232,7 @@ const getRecordingsFilter = async (
     let arrayNameTs: any = [];
     let camerasInfoTmp: any = Object.values(cameras[0]);
     let tmpCams: any = camerasInfoTmp[numberCam - 1];
-    const apiResponse = await estructureInfoApi(tmpCams["recordings"], data);
+    const apiResponse = await estructureInfoApi(tmpCams["recordings"], data,id_xtam);
     return apiResponse;
   }
 };
