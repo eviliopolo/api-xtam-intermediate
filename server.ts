@@ -7,7 +7,7 @@ import routes from "./network";
 import redisService from "./services/redis.service";
 
 
-const PORT = process.env.PORT || 3005
+const PORT = process.env.PORT || 3008
 const app = express()
 
 app.use(cors())
