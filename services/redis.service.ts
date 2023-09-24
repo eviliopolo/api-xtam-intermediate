@@ -49,7 +49,7 @@ async function syncInfoMongoDB() {
     } else {
       console.log("not exists data for update");
     }
-  }, 180000);
+  }, 1800000);
 }
 
 async function deleteMongo() {
