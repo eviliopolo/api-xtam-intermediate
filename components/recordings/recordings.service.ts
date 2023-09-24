@@ -5,6 +5,7 @@ import redisConect from "../../services/redis.client";
 import axios from "axios";
 import "dotenv/config";
 import moment from "moment";
+import service from "../updateRecordingsDate/updateRecordings.service"
 const client = new redisConect();
 
 const RedisCache = async (data: redisdata) => {
@@ -40,7 +41,17 @@ const RedisCache = async (data: redisdata) => {
     date: data.DATE,
     cameras: infoCams,
   };
+const dateTmp = await  service.oneRecordingDate(data.ID_CAMERA)
+if(dateTmp === null){
+  let pushDate = {
+    id_cam: data.ID_CAMERA,
+    dateUpdate: data.DATATIMESTART
+}
+  service.updateCreate(pushDate)
+}else{
+  service.updateDate(data.ID_CAMERA,data.DATATIMESTART)
 
+}
   const resRedis = await client.connectRedis();
   let redisGetInfo = await resRedis.get(KEYNAME);
 
